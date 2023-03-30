@@ -3,6 +3,7 @@
 // in the html.
 
 var currentHour = dayjs().hour();
+
 $(function() {
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
@@ -28,6 +29,8 @@ $(function() {
 
   $('.time-block').each(function(){
     var hour = parseInt($(this).attr('id').split('-')[1]);
+    console.log(hour);
+    console.log(currentHour);
     if (hour < currentHour){
       $(this).addClass('past')
     } else if (hour === currentHour) {
