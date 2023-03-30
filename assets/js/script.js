@@ -51,17 +51,6 @@ $(function() {
   //
   // TODO: Add code to display the current date in the header of the page.
   });
-});
-
-//Change CSS background color
-$(".time-block").each(function() {
-  const timeBlockHour = parseInt($(this).attr("hour"));
-  const descriptionTextarea = $(this).find(".description");
-  if (timeBlockHour < currentHour) {
-    descriptionTextarea.css("background-color", "gray");
-  } else if (timeBlockHour === currentHour) {
-    descriptionTextarea.css("background-color", "red");
-  } else {
-    descriptionTextarea.css("background-color", "green");
-  }
+  var currentDay = dayjs().format('MMMM-DD-YYYY-dddd');
+  $('#currentDay').text(currentDay);
 });
