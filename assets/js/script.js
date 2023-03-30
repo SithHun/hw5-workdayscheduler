@@ -29,8 +29,6 @@ $(function() {
 
   $('.time-block').each(function(){
     var hour = parseInt($(this).attr('id').split('-')[1]);
-    console.log(hour);
-    console.log(currentHour);
     if (hour < currentHour){
       $(this).addClass('past')
     } else if (hour === currentHour) {
@@ -44,8 +42,8 @@ $(function() {
   // the values of the corresponding textarea elements. HINT: How can the id
   // attribute of each time-block be used to do this?
 
-  $('time-block').each(function() {
-    var timeBlockId = $(this).attr('id');
+  $('.time-block').each(function() {
+    var timeBlockId = $(this).attr("id");
     var userInput = localStorage.getItem(timeBlockId);
 
     if (userInput !== null) {
