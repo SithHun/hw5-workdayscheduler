@@ -2,9 +2,8 @@
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
 
-
-
-$(function () {
+var currentHour = dayjs().hour();
+$(function() {
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
   // local storage. HINT: What does `this` reference in the click listener
@@ -25,8 +24,8 @@ $(function () {
   // attribute of each time-block be used to conditionally add or remove the
   // past, present, and future classes? How can Day.js be used to get the
   // current hour in 24-hour time?
-  var currentHour = dayJs().hour();
-  
+
+
   $('.time-block').each(function(){
     var hour = parseInt($(this).attr('id').split('-')[1]);
     if (hour < currentHour){
@@ -41,105 +40,28 @@ $(function () {
   // TODO: Add code to get any user input that was saved in localStorage and set
   // the values of the corresponding textarea elements. HINT: How can the id
   // attribute of each time-block be used to do this?
+
+  $('time-block').each(function() {
+    var timeBlockId = $(this).attr('id');
+    var userInput = localStorage.getItem(timeBlockId);
+
+    if (userInput !== null) {
+      $(this).find('.description').val(userInput);
+    }
   //
   // TODO: Add code to display the current date in the header of the page.
+  });
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// $(function() {
-//   const currentHour = dayjs().hour();
-
-//   $(".time-block").each(function() {
-//     const hour = parseInt($(this).attr("id").split("-")[1]);
-//     if (hour < currentHour) {
-//       $(this).addClass("past");
-//     } else if (hour === currentHour) {
-//       $(this).addClass("present");
-//     } else {
-//       $(this).addClass("future");
-//     }
-//   });
-
-//   $(".time-block").each(function() {
-//     const timeBlockHour = parseInt($(this).attr("data-hour"));
-//     const descriptionTextarea = $(this).find(".description");
-//     if (timeBlockHour < currentHour) {
-//       descriptionTextarea.css("background-color", "gray");
-//     } else if (timeBlockHour === currentHour) {
-//       descriptionTextarea.css("background-color", "red");
-//     } else {
-//       descriptionTextarea.css("background-color", "green");
-//     }
-//   });
-
-//   $(".saveBtn").on("click", function(event) {
-//     event.preventDefault();
-//     const userInput = $(this).siblings(".description").val();
-//     const timeBlockId = $(this).parent().attr("id");
-//     localStorage.setItem(timeBlockId, userInput);
-//   });
-
-//   $(".time-block").each(function() {
-//     const timeBlockId = $(this).attr("id");
-//     const userInput = localStorage.getItem(timeBlockId);
-//     if (userInput !== null) {
-//       $(this).find(".description").val(userInput);
-//     }
-//   });
-// });
+//Change CSS background color
+$(".time-block").each(function() {
+  const timeBlockHour = parseInt($(this).attr("hour"));
+  const descriptionTextarea = $(this).find(".description");
+  if (timeBlockHour < currentHour) {
+    descriptionTextarea.css("background-color", "gray");
+  } else if (timeBlockHour === currentHour) {
+    descriptionTextarea.css("background-color", "red");
+  } else {
+    descriptionTextarea.css("background-color", "green");
+  }
+});
